@@ -23,11 +23,14 @@ spec:
     global:
       enabled: false
       tlsDisable: false
+    injector:
+      enabled: true
+      logLevel: "debug"
     ui:
       enabled: true
       serviceType: ClusterIP
     server:
-      logLevel: debug
+      logLevel: "debug"
       extraEnvironmentVars:
         VAULT_CACERT: /vault/userconfig/vault-server-tls/vault.ca
         VAULT_TLSCERT: /vault/userconfig/vault-server-tls/vault.crt
@@ -41,7 +44,7 @@ spec:
         enabled: true
         size: 5Gi
         mountPath: "/vault/data"
-        storageClass: hostpath
+        storageClass: "hostpath"
         accessMode: ReadWriteOnce
       ha:
         enabled: true
