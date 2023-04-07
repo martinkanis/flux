@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vault
+  namespace: vault
+spec:
+  releaseName: vault
+  targetNamespace: vault
+  chart:
+    spec:
+      chart: vault
+      version: 0.24.0
+      sourceRef:
+        kind: HelmRepository
+        name: hashicorp
+        namespace: vault
+  interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 15
+  values:
+    global:
+      enabled: true
+      tlsDisable: false
+    ui:
+      enabled: true
+      serviceType: ClusterIP
+    server:
+      extraEnvironmentVars:
+        VAULT_CACERT: /vault/userconfig/vault-server-tls/vault.ca
+        VAULT_TLSCERT: /vault/userconfig/vault-server-tls/vault.crt
+        VAULT_TLSKEY: /vault/userconfig/vault-server-tls/vault.key
+      extraVolumes:
+        - type: secret
+          name: vault-server-tls
+      standalone:
+        enabled: false
+      ha:
+        enabled: true
+        replicas: 3
+        raft:
+          enabled: true
+          setNodeId: true
+          config: |
+            ui = true
+            listener "tcp" {
+              tls_disable = 0
+              address = "[::]:8200"
+              cluster_address = "[::]:8201"
+              tls_cert_file = "/vault/userconfig/vault-server-tls/vault.crt"
+              tls_key_file  = "/vault/userconfig/vault-server-tls/vault.key"
+              tls_client_ca_file = "/vault/userconfig/vault-server-tls/vault.ca"
+            }
+            storage "raft" {
+              path = "/vault/data"
+            }
+            disable_mlock = true
+            service_registration "kubernetes" {}
+
