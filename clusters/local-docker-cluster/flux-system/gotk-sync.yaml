@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./local-docker-cluster
+  path: ./clusters/local-docker-cluster
   prune: true
   sourceRef:
     kind: GitRepository
