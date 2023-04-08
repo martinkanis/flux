@@ -32,18 +32,18 @@ spec:
     server:
       enabled: true
       logLevel: "debug"
-      extraEnvironmentVars:
-        VAULT_CACERT: /vault/userconfig/vault-server-tls/vault.ca
-        VAULT_TLSCERT: /vault/userconfig/vault-server-tls/vault.crt
-        VAULT_TLSKEY: /vault/userconfig/vault-server-tls/vault.key
-      extraVolumes:
-        - type: secret
-          name: vault-server-tls
+#      extraEnvironmentVars:
+#        VAULT_CACERT: /vault/userconfig/vault-server-tls/vault.ca
+#        VAULT_TLSCERT: /vault/userconfig/vault-server-tls/vault.crt
+#        VAULT_TLSKEY: /vault/userconfig/vault-server-tls/vault.key
+#      extraVolumes:
+#        - type: secret
+#          name: vault-server-tls
       standalone:
         enabled: false
       dataStorage:
         enabled: true
-        size: 5Gi
+        size: 6Gi
         mountPath: "/vault/data"
         storageClass: "hostpath"
         accessMode: ReadWriteOnce
@@ -58,12 +58,12 @@ spec:
           config: |
             ui = true
             listener "tcp" {
-              tls_disable = 0
+              tls_disable = 1
               address = "[::]:8200"
               cluster_address = "[::]:8201"
-              tls_cert_file = "/vault/userconfig/vault-server-tls/vault.crt"
-              tls_key_file  = "/vault/userconfig/vault-server-tls/vault.key"
-              tls_client_ca_file = "/vault/userconfig/vault-server-tls/vault.ca"
+#              tls_cert_file = "/vault/userconfig/vault-server-tls/vault.crt"
+#              tls_key_file  = "/vault/userconfig/vault-server-tls/vault.key"
+#              tls_client_ca_file = "/vault/userconfig/vault-server-tls/vault.ca"
             }
             storage "raft" {
               path = "/vault/data"
