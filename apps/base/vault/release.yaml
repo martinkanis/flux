@@ -56,3 +56,5 @@ spec:
             storage "raft" {
               path = "/vault/data"
             }
+      # As we are testing on docker-desktop K8S affinity not applied
+      affinity: ""
