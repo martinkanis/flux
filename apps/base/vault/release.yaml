@@ -34,7 +34,7 @@ spec:
       enabled: true
       # As we are testing on docker-desktop K8S affinity not applied
       affinity: ""
-      logLevel: "debug"
+      logLevel: "trace"
       standalone:
         enabled: false
       dataStorage:
