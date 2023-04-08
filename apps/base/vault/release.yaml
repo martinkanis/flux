@@ -22,7 +22,7 @@ spec:
   values:
     global:
       enabled: false
-      tlsDisable: false
+      tlsDisable: true
     injector:
       enabled: true
       logLevel: "debug"
@@ -40,8 +40,6 @@ spec:
         mountPath: "/vault/data"
         storageClass: "hostpath"
         accessMode: ReadWriteOnce
-      service:
-        enabled: false
       ha:
         enabled: true
         replicas: 3
