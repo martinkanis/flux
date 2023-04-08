@@ -41,7 +41,7 @@ spec:
         storageClass: "hostpath"
         accessMode: ReadWriteOnce
       service:
-        enabled: true
+        enabled: false
       ha:
         enabled: true
         replicas: 3
