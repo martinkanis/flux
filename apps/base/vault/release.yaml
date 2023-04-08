@@ -31,6 +31,8 @@ spec:
       serviceType: ClusterIP
     server:
       enabled: true
+      # As we are testing on docker-desktop K8S affinity not applied
+      affinity: ""
       logLevel: "debug"
       standalone:
         enabled: false
@@ -56,5 +58,3 @@ spec:
             storage "raft" {
               path = "/vault/data"
             }
-      # As we are testing on docker-desktop K8S affinity not applied
-      affinity: ""
