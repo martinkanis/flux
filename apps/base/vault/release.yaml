@@ -30,6 +30,7 @@ spec:
       enabled: true
       serviceType: ClusterIP
     server:
+      enabled: true
       logLevel: "debug"
       extraEnvironmentVars:
         VAULT_CACERT: /vault/userconfig/vault-server-tls/vault.ca
@@ -46,6 +47,8 @@ spec:
         mountPath: "/vault/data"
         storageClass: "hostpath"
         accessMode: ReadWriteOnce
+      service:
+        enabled: true
       ha:
         enabled: true
         replicas: 3
