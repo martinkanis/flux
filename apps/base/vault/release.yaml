@@ -22,7 +22,7 @@ spec:
   values:
     global:
       enabled: false
-      tlsDisable: true
+      tlsDisable: false
     injector:
       enabled: true
       affinity: ""
